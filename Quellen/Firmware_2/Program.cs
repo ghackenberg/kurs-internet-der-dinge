@@ -16,7 +16,7 @@ namespace Firmware_2
         {
             var random = new Random();
             var token = "s833bD55HhzFbCjwxvLq";
-            var host = "localhost";
+            var host = "192.168.0.102";
             var port = 1883;
 
             var factory = new MqttFactory();
