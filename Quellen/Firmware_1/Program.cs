@@ -21,7 +21,7 @@ namespace Firmware_1
 
             // HTTP-Client erzeugen
             var client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:8080");
+            client.BaseAddress = new Uri("http://192.168.0.102:8080");
 
             // Interval-Attribute abfragen
             var response = await client.GetAsync($"/api/v1/{token}/attributes?sharedKeys=interval");
