@@ -10,25 +10,27 @@ Das Repository enthält Quellcode für Gerätesoftware, welcher mit der Programm
 
 ### ⚙️ [Firmware 1](./Quellen/Firmware_1/)
 
-![](./Quellen/Firmware_1/Architecture.svg)
-
 Die *erste Version* der Firmware enthält die folgenden Funktionen:
 
 * Konfigurationsdaten von der IoT-Plattform an das IoT-Gateway über HTTP
 * Telemetriedaten vom IoT-Gateway an die IoT-Plattform über HTTP
 
-### ⚙️ [Firmware 2](./Quellen/Firmware_2/)
+Die folgende Grafik zeigt die Architektur der Firmware als Flussdiagramm:
 
-![](./Quellen/Firmware_2/Architecture.svg)
+![](./Quellen/Firmware_1/Architecture.svg)
+
+### ⚙️ [Firmware 2](./Quellen/Firmware_2/)
 
 Die *zweite Version* der Firmware enthält die folgenden Funktionen:
 
 * Konfigurationsdaten von der IoT-Plattform an das IoT-Gateway über MQTT
 * Telemetriedaten vom IoT-Gateway an die IoT-Plattform über MQTT
 
-### ⚙️ [Firmware 3](./Quellen/Firmware_3/)
+Die folgende Grafik zeigt die Architektur der Firmware als Flussdiagramm:
 
-![](./Quellen/Firmware_3/Architecture.svg)
+![](./Quellen/Firmware_2/Architecture.svg)
+
+### ⚙️ [Firmware 3](./Quellen/Firmware_3/)
 
 Die *dritte Version* der Firmware enthält die folgenden Funktionen:
 
@@ -37,6 +39,10 @@ Die *dritte Version* der Firmware enthält die folgenden Funktionen:
 * Telemetriedaten vom IoT-Gateway an die IoT-Plattform über MQTT
 * Firmwaredaten von der IoT-Plattform an das IoT-Gateway über MQTT
 * Neustart der Firmware auf dem IoT-Gateway nach erfolgreicher Übertragung
+
+Die folgende Grafik zeigt die Architektur der Firmware als Flussdiagramm:
+
+![](./Quellen/Firmware_3/Architecture.svg)
 
 ## Dokumente
 
