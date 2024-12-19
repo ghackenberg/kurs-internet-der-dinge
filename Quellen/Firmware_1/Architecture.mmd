@@ -1,0 +1,7 @@
+flowchart LR
+
+    IoTGateway <--"HTTP Anfrage<br/>(POST, Telemetrie)<hr/>HTTP Antwort<br/>(OK)"--> IoTPlatform
+
+    IoTGateway <--"HTTP Anfrage<br/>(GET, Konfiguration)<hr/>HTTP Antwort<br/>(OK, Konfiguration)"--> IoTPlatform
+
+    IoTPlatform <--"HTTP Anfrage<br/>(PUT, Konfiguration)<hr/>HTTP Antwort<br/>(OK)"--> Browser

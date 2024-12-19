@@ -1,0 +1,9 @@
+flowchart LR
+
+    IoTGateway --"MQTT Publish<br/>(Telemetrie)"--> IoTPlatform
+    IoTGateway --"MQTT Subscribe (Konfiguration)"--> IoTPlatform
+
+    IoTPlatform --"MQTT Publish (Konfiguration)"--> IoTGateway
+
+    IoTPlatform <--"HTTP Anfrage<br/>(PUT, Konfiguration)<hr/>HTTP Antwort<br/>(OK)"--> Browser
+    
