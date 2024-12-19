@@ -180,11 +180,13 @@ namespace Firmware_3
             try
             {
                 // Connect to MQTT broker
+
                 Console.WriteLine("Connecting to MQTT broker");
 
                 await mqtt.ConnectAsync(options);
 
                 // Connect to Modbus server
+
                 Console.WriteLine("Connecting to Modbus server");
 
                 var address = IPAddress.Parse(Constants.LOGO_HOST);
@@ -193,29 +195,89 @@ namespace Firmware_3
 
                 modbus.Connect(endpoint, endianness);
 
+                // Auf externe Temperatursteuerung umschalten
+
+                await modbus.WriteSingleCoilAsync(1, 16, true);
+
                 // Collect and forward telemetry
+
                 while (active)
                 {
                     // Collect telemetry
+
                     Console.WriteLine("Reading Modbus holding register 528");
 
-                    // - Read data
-                    var memory = await modbus.ReadHoldingRegistersAsync<ushort>(1, 528, 1);
-                    // - Convert data
-                    var array = memory.ToArray();
-                    // - Scale data
-                    var temperature = array[0] * 0.1;
+                    // Heizung
+
+                    var memHeizung = await modbus.ReadCoilsAsync(1, 8192, 1);
+                    var arrHeizung = memHeizung.ToArray();
+                    var heizung = arrHeizung[0];
+
+                    // Heizung ein
+
+                    var memHeizungEin = await modbus.ReadCoilsAsync(1, 8256, 1);
+                    var arrHeizungEin = memHeizungEin.ToArray();
+                    var heizungEin = arrHeizungEin[0];
+
+                    // Externe Temperatur selektiert
+
+                    var memExterneTemperaturSelektiert = await modbus.ReadCoilsAsync(1, 8257, 1);
+                    var arrExterneTemperaturSelektiert = memExterneTemperaturSelektiert.ToArray();
+                    var externeTemperaturSelektiert = arrExterneTemperaturSelektiert[0];
+
+                    // Temperature Set2 selektiert
+
+                    var memTemperaturSet2Selektiert = await modbus.ReadCoilsAsync(1, 8258, 1);
+                    var arrTemperaturSet2Selektiert = memExterneTemperaturSelektiert.ToArray();
+                    var temperaturSet2Selektiert = arrTemperaturSet2Selektiert[0];
+
+                    // Temperature Set1 selektiert
+
+                    var memTemperaturSet1Selektiert = await modbus.ReadCoilsAsync(1, 8259, 1);
+                    var arrTemperaturSet1Selektiert = memTemperaturSet1Selektiert.ToArray();
+                    var temperaturSet1Selektiert = arrTemperaturSet1Selektiert[0];
+
+                    // Ist-Temperatur
+
+                    var memIstTemperatur = await modbus.ReadHoldingRegistersAsync<ushort>(1, 528, 1);
+                    var arrIstTemperatur = memIstTemperatur.ToArray();
+                    var istTemperatur = arrIstTemperatur[0] * 0.1;
+
+                    // Soll-Temperatur
+
+                    var memSollTemperatur = await modbus.ReadHoldingRegistersAsync<ushort>(1, 529, 1);
+                    var arrSollTemperatur = memSollTemperatur.ToArray();
+                    var sollTemperatur = arrSollTemperatur[0] * 0.1;
+
+                    // Soll-Temperatur anpassen
+
+                    if (istTemperatur <= 55)
+                    {
+                        await modbus.WriteSingleRegisterAsync(1, 0, 600);
+                    }
+                    else if (istTemperatur >= 60)
+                    {
+                        await modbus.WriteSingleRegisterAsync(1, 0, 550);
+                    }
 
                     // Forward telemetry
+
                     Console.WriteLine("Sending device telemetry via MQTT");
 
                     var message = new JsonObject();
-                    message["random"] = random.Next(0, 100);
-                    message["temperature"] = temperature;
+
+                    message["heizung"] = heizung;
+                    message["heizungEin"] = heizungEin;
+                    message["externeTemperaturSelektiert"] = externeTemperaturSelektiert;
+                    message["temperaturSet2Selektiert"] = temperaturSet2Selektiert;
+                    message["temperaturSet1Selektiert"] = temperaturSet1Selektiert;
+                    message["istTemperatur"] = istTemperatur;
+                    message["sollTemperatur"] = sollTemperatur;
 
                     await mqtt.PublishStringAsync("v1/devices/me/telemetry", message.ToJsonString());
 
                     // Sleep
+
                     await Task.Delay(1000);
                 }
             }
