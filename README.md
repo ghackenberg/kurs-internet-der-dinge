@@ -7,6 +7,7 @@ Dieses Repository enthält Unterlagen zum Kurs **Internet der Dinge**, der an de
 ## Quellen
 
 Das Repository enthält Quellcode für Gerätesoftware, welcher mit der Programmiersprache C# und für die IoT-Platform Thingsboard geschrieben ist.
+Außerdem enthält das Repository Quelltext, welcher die Grundlagen der Entwicklung von OPC UA Anwendungen (sowohl Server als auch Client) zeigt.
 
 ### ⚙️ [Firmware 1](./Quellen/Firmware_1/)
 
@@ -43,6 +44,22 @@ Die *dritte Version* der Firmware enthält die folgenden Funktionen:
 Die folgende Grafik zeigt die Architektur der Firmware als Flussdiagramm:
 
 ![](./Quellen/Firmware_3/Architecture.svg)
+
+### 📂 OPC Grundlagen
+
+Die OPC UA Grundlagen sind in zwei Projekt geteilt, ein Server-Projekt und ein Client-Projekt.
+
+#### ⚙️ [OPC Grundlagen - Server](./Quellen/OPC-Basics-Server/)
+
+Das Server-Projekt zeigt, wie man einen einfachen OPC UA Server mit C# entwickelt und bereitstellen kann.
+
+*Mehr kommt bald.*
+
+#### ⚙️ [OPC Grundlagen - Client](./Quellen/OPC-Basics-Client/)
+
+Das Client-Projekt zeigt, wie man einen einfachen OPC UA Client mit C# entwickelt und bereitstellen kann.
+
+*Mehr kommt bald.*
 
 ## Dokumente
 
