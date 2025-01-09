@@ -9,6 +9,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firmware_1", "Firmware_1\Fi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firmware_2", "Firmware_2\Firmware_2.csproj", "{F860C2C6-C8DA-4607-B9D0-25847031655F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OPC-Basics-Server", "OPC-Basics-Server\OPC-Basics-Server.csproj", "{3636A226-CC58-48ED-8DF2-78113CCB43EF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OPC-Basics-Client", "OPC-Basics-Client\OPC-Basics-Client.csproj", "{6247DFB0-F9F8-4179-BED2-626BDC81101C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{F860C2C6-C8DA-4607-B9D0-25847031655F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F860C2C6-C8DA-4607-B9D0-25847031655F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F860C2C6-C8DA-4607-B9D0-25847031655F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3636A226-CC58-48ED-8DF2-78113CCB43EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3636A226-CC58-48ED-8DF2-78113CCB43EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3636A226-CC58-48ED-8DF2-78113CCB43EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3636A226-CC58-48ED-8DF2-78113CCB43EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6247DFB0-F9F8-4179-BED2-626BDC81101C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6247DFB0-F9F8-4179-BED2-626BDC81101C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6247DFB0-F9F8-4179-BED2-626BDC81101C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6247DFB0-F9F8-4179-BED2-626BDC81101C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
