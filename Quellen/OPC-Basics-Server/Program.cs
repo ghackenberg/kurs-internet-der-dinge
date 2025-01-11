@@ -15,6 +15,15 @@ namespace OPC_Basics_Server
 
         // Variablenknoten
 
+        [OpcDataType(id: "A", namespaceIndex: 2)]
+        struct A
+        {
+            public int X;
+            public int Y;
+            public int Z;
+        };
+
+        private static OpcDataVariableNode<A> test = new OpcDataVariableNode<A>(machine, "Test", new A { X = 1, Y = 2, Z = 3 });
         private static OpcDataVariableNode<bool> running = new OpcDataVariableNode<bool>(machine, "Running", true);
         private static OpcDataVariableNode<int> version = new OpcDataVariableNode<int>(machine, "Version", 1);
         private static OpcDataVariableNode<int> random = new OpcDataVariableNode<int>(machine, "Random", 0);
@@ -36,7 +45,7 @@ namespace OPC_Basics_Server
 
             // OPC UA Server starten und Werte der Variablenknoten zyklisch aktualisieren
 
-            using (var server = new OpcServer("opc.tcp://localhost:4840/", machine))
+            using (var server = new OpcServer("opc.tcp://localhost:4840/", machine, new OpcDataTypeNode<A>()))
             {
                 // OPC UA Server starten
 
@@ -62,8 +71,11 @@ namespace OPC_Basics_Server
 
         private static OpcVariableValue<object> WriteParameter(OpcContext context, OpcVariableValue<object> value)
         {
+            // Aufruf protokollieren
             Console.WriteLine($"Neuer Wert {value.Value}");
+            // Wert zurückgeben (und somit setzen)
             return value;
+
             //return new OpcVariableValue<object>(parameter.Value, new DateTime(), new OpcStatus(OpcStatusCode.BadNotWritable));
         }
 
@@ -71,17 +83,22 @@ namespace OPC_Basics_Server
 
         private static void MethodA()
         {
+            // Aufruf protokollieren
             Console.WriteLine("Methode A aufgerufen!");
         }
         private static int MethodB()
         {
+            // Aufruf protokollieren
             Console.WriteLine("Methode B aufgerufen!");
+            // Wert zurückgeben
             return 0;
         }
         private static int MethodC(int param)
         {
-            Console.WriteLine("Methode C aufgerufen!");
-            return param;
+            // Aufruf protokollieren
+            Console.WriteLine($"Methode C mit Parameter {param} aufgerufen!");
+            // Wert berechnen und zurückgeben
+            return param * 2;
         }
     }
 }
