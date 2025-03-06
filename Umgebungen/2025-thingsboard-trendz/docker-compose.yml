@@ -2,7 +2,7 @@ version: '3.0'
 services:
   mytrendz:
     restart: always
-    image: "thingsboard/trendz:1.12.0"
+    image: "thingsboard/trendz:1.12.3"
     ports:
       - "8888:8888"
     environment:
@@ -20,7 +20,7 @@ services:
       - 2025-thingsboard-trendz-logs:/var/log/trendz
   mypyexecutor:
     restart: always
-    image: "thingsboard/trendz-python-executor:1.12.0"
+    image: "thingsboard/trendz-python-executor:1.12.3"
     ports:
       - "8181:8181"
     environment:
