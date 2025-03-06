@@ -1,0 +1,20 @@
+version: '3.0'
+services:
+  mytb:
+    restart: always
+    image: "thingsboard/tb-postgres"
+    ports:
+      - "8080:9090"
+      - "1883:1883"
+      - "7070:7070"
+      - "5683-5688:5683-5688/udp"
+    environment:
+      TB_QUEUE_TYPE: in-memory
+    volumes:
+      - 2025-thingsboard-cloud-data:/data
+      - 2025-thingsboard-cloud-logs:/var/log/thingsboard
+volumes:
+  2025-thingsboard-cloud-data:
+    external: true
+  2025-thingsboard-cloud-logs:
+    external: true

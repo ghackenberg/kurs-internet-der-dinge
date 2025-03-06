@@ -11,10 +11,10 @@ services:
     environment:
       TB_QUEUE_TYPE: in-memory
     volumes:
-      - mytb-data:/data
-      - mytb-logs:/var/log/thingsboard
+      - 2024-thingsboard-cloud-data:/data
+      - 2024-thingsboard-cloud-logs:/var/log/thingsboard
 volumes:
-  mytb-data:
+  2024-thingsboard-cloud-data:
     external: true
-  mytb-logs:
+  2024-thingsboard-cloud-logs:
     external: true

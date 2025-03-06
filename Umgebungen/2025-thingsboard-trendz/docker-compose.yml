@@ -1,0 +1,49 @@
+version: '3.0'
+services:
+  mytrendz:
+    restart: always
+    image: "thingsboard/trendz:1.12.0"
+    ports:
+      - "8888:8888"
+    environment:
+      TB_API_URL: http://localhost:8080
+      TRENDZ_LICENSE_SECRET: PUT_YOUR_LICENSE_SECRET_HERE
+      TRENDZ_LICENSE_INSTANCE_DATA_FILE: /data/license.data
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/trendz
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+      SCRIPT_ENGINE_PROVIDER: DOCKER_CONTAINER
+      SCRIPT_ENGINE_DOCKER_PROVIDER_URL: mypyexecutor:8080
+      SCRIPT_ENGINE_TIMEOUT: 30000
+    volumes:
+      - 2025-thingsboard-trendz-data:/data
+      - 2025-thingsboard-trendz-logs:/var/log/trendz
+  mypyexecutor:
+    restart: always
+    image: "thingsboard/trendz-python-executor:1.12.0"
+    ports:
+      - "8181:8181"
+    environment:
+      SCRIPT_ENGINE_RUNTIME_TIMEOUT: 30000
+      EXECUTOR_MANAGER: 1
+      EXECUTOR_SCRIPT_ENGINE: 6
+      THROTTLING_QUEUE_CAPACITY: 10
+      THROTTLING_THREAD_POOL_SIZE: 6
+      NETWORK_BUFFER_SIZE: 10485760
+  postgres:
+    restart: always
+    image: "postgres:15"
+    ports:
+      - "5432"
+    environment:
+      POSTGRES_DB: trendz
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - 2025-thingsboard-trendz-data/db:/var/lib/postgresql/data
+volumes:
+  2025-thingsboard-trendz-data:
+    external: true
+  2025-thingsboard-trendz-logs:
+    external: true
+  2025-thingsboard-trendz-data-db:
+    external: true
